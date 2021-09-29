@@ -1,0 +1,30 @@
+version: '3'
+services:
+  web:
+    image: nginx:latest
+    ports:
+        - "8000:80"
+    volumes:
+        - ./nginx.conf:/etc/nginx/conf.d/nginx.conf
+        - ./app:/app
+  php:
+    build:
+      context: .
+      dockerfile: PHP.Dockerfile
+    volumes:
+        - ./app:/app
+        - ./gnupg.conf:/var/www/.gnupg/gnupg.conf
+  mysql:
+    image: mariadb:latest
+    environment:
+        MYSQL_ROOT_PASSWORD: ''
+        MYSQL_USER: 'root'
+        MYSQL_PASSWORD: ''
+        MYSQL_DATABASE: 'yamero'
+    volumes:
+        - mysqldata:/var/lib/mysql
+    ports:
+        - 3306:3306
+volumes: #this mapping is used to keep test/development db separate from production
+    mysqldata: {}
+   

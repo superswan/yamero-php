@@ -1,0 +1,6 @@
+# a directory where i've chosen to keep notes/cheat sheets for the project
+local/
+# configuration files, it is suggested to build your own from the examples provided 
+docker-compose.yml
+gnupg.conf
+dbconfig.php
